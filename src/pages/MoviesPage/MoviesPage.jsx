@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import MovieList from "../../components/MovieList/MovieList";
+import { searchMovies } from "../../apiService";
+import styles from "./MoviesPage.module.css";
 
 function MoviesPage() {
   const [movies, setMovies] = useState([]);
@@ -20,16 +21,8 @@ function MoviesPage() {
     if (query) {
       const fetchMovies = async () => {
         try {
-          const response = await axios.get(
-            `https://api.themoviedb.org/3/search/movie?query=${query}`,
-            {
-              headers: {
-                Authorization:
-                  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YWFhOTMzZWIzYzY0OTcxZmZjNTg4YjU0ZWQzODBlMSIsIm5iZiI6MTcyNTEwNDgzNy45NjIwMDMsInN1YiI6IjY2ZDMwMjI2NDhkM2FhNTAwMDliYTQ3ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p2lSdyugt6H_1aX5ky1eE3xu9s_Gqtgkoq6MKdEsOuk",
-              },
-            }
-          );
-          setMovies(response.data.results);
+          const results = await searchMovies(query);
+          setMovies(results);
         } catch (error) {
           console.error(error);
         }
@@ -48,6 +41,7 @@ function MoviesPage() {
           name="query"
           defaultValue={query}
           placeholder="Enter movie title"
+          className={styles.input}
         />
         <button type="submit">Search</button>
       </form>

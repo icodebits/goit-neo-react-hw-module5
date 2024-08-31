@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, Link, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import { fetchMovieDetails } from "../../apiService";
 import MovieCast from "../../components/MovieCast/MovieCast";
 import MovieReviews from "../../components/MovieReviews/MovieReviews";
 import styles from "./MovieDetailsPage.module.css";
@@ -13,24 +13,16 @@ function MovieDetailsPage() {
   const { query } = location.state || {};
 
   useEffect(() => {
-    const fetchMovieDetails = async () => {
+    const getMovieDetails = async () => {
       try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${movieId}`,
-          {
-            headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1YWFhOTMzZWIzYzY0OTcxZmZjNTg4YjU0ZWQzODBlMSIsIm5iZiI6MTcyNTEwNDgzNy45NjIwMDMsInN1YiI6IjY2ZDMwMjI2NDhkM2FhNTAwMDliYTQ3ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.p2lSdyugt6H_1aX5ky1eE3xu9s_Gqtgkoq6MKdEsOuk",
-            },
-          }
-        );
-        setMovie(response.data);
+        const movieData = await fetchMovieDetails(movieId);
+        setMovie(movieData);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchMovieDetails();
+    getMovieDetails();
   }, [movieId]);
 
   const goBack = () => {
