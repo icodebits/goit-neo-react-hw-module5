@@ -1,0 +1,49 @@
+.castContainer {
+  padding: 20px;
+}
+
+.heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.castList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.castItem {
+  width: 150px;
+  text-align: center;
+}
+
+.actorImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.actorInfo {
+  margin-top: 10px;
+}
+
+.actorName {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.characterName {
+  font-size: 14px;
+  color: #666;
+}
+
+.noReviews {
+  font-size: 16px;
+  color: #999;
+  text-align: center;
+}

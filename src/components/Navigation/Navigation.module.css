@@ -1,0 +1,18 @@
+/* Navigation.module.css */
+.nav {
+  display: flex;
+  gap: 20px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc;
+  background-color: #f8f8f8;
+}
+
+.link {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+.activeLink {
+  color: red;
+}
